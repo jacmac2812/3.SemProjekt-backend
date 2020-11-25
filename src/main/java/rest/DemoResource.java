@@ -84,7 +84,7 @@ public class DemoResource {
         return "{\"msg\": \"Hello to (admin) User: " + thisuser + "\"}";
     }
 
-    @GET
+    @GET //fjern
     @Produces(MediaType.APPLICATION_JSON)
     @Path("jokes")
     @RolesAllowed("user")
@@ -96,7 +96,7 @@ public class DemoResource {
         return GSON.toJson(cDTO);
     }
 
-    @GET
+    @GET //fjern
     @Produces(MediaType.APPLICATION_JSON)
     @Path("swabi")
     public String getSwabi() throws IOException {
@@ -107,7 +107,7 @@ public class DemoResource {
         return GSON.toJson(sDTO);
     }
 
-    @GET
+    @GET // fjern til sidst efter lavet opret user metode
     @Produces(MediaType.APPLICATION_JSON)
     @Path("populate")
     public String populate() throws IOException {
