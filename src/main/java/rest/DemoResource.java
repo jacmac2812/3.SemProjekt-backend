@@ -2,9 +2,11 @@ package rest;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import dto.CategoryDTO;
 import dto.ChuckDTO;
 import dto.CombinedDTO;
 import dto.DadDTO;
+import dto.ProductDTO;
 import dto.SwabiDTO;
 import entities.Role;
 import entities.User;
@@ -23,7 +25,8 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.SecurityContext;
-import jokefetcher.JokeFetcher;
+import fetchers.JokeFetcher;
+import fetchers.ProductFetcher;
 import utils.EMF_Creator;
 import utils.HttpUtils;
 
@@ -105,6 +108,28 @@ public class DemoResource {
         SwabiDTO sDTO = jf.getSwabi();
 
         return GSON.toJson(sDTO);
+    }
+    
+        @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("product")
+    public String getProduct() throws IOException {
+        ProductFetcher pf = new ProductFetcher();
+
+        ProductDTO pDTO = pf.getProduct();
+
+        return GSON.toJson(pDTO);
+    }
+    
+            @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("products")
+    public String getProducts() throws IOException {
+        ProductFetcher pf = new ProductFetcher();
+
+        CategoryDTO cDTO = pf.getProducts();
+
+        return GSON.toJson(cDTO);
     }
 
     @GET // fjern til sidst efter lavet opret user metode

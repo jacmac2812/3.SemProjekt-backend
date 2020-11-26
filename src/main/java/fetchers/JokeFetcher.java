@@ -1,4 +1,4 @@
-package jokefetcher;
+package fetchers;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -14,6 +14,7 @@ import utils.HttpUtils;
 
 
 public class JokeFetcher {
+    
  
         private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
         
