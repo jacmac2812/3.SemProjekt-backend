@@ -22,15 +22,15 @@ public class ProductFetcher {
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
 
     public ProductDTO getProduct() throws IOException {
-        String product = HttpUtils.fetchData("https://api.bestbuy.com/v1/products/8880044.json?&apiKey=UrO0xS5JMW2zjWOIvwyJzF5h");
+        String product = HttpUtils.fetchData("https://api.bestbuy.com/v1/products/8880044.json?&apiKey=7xOnwr4pXXGdQXNUIIkqD6Jp");
 
         
         ProductDTO pDTO = GSON.fromJson(product, ProductDTO.class);
         
         return pDTO;
     }
-    public CategoryDTO getProducts() throws IOException {
-        String products = HttpUtils.fetchData("https://api.bestbuy.com/v1/products(categoryPath.id%20=abcat0101000)?format=json&pageSize=100&apiKey=UrO0xS5JMW2zjWOIvwyJzF5h");
+    public CategoryDTO getProducts(String category) throws IOException {
+        String products = HttpUtils.fetchData("https://api.bestbuy.com/v1/products(categoryPath.id%20=" + category + ")?format=json&pageSize=100&apiKey=7xOnwr4pXXGdQXNUIIkqD6Jp");
 
         
         CategoryDTO categoryDTO = GSON.fromJson(products, CategoryDTO.class);

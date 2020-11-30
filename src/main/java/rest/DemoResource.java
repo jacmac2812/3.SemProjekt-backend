@@ -27,6 +27,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.SecurityContext;
 import fetchers.JokeFetcher;
 import fetchers.ProductFetcher;
+import javax.ws.rs.PathParam;
 import utils.EMF_Creator;
 import utils.HttpUtils;
 
@@ -120,14 +121,15 @@ public class DemoResource {
 
         return GSON.toJson(pDTO);
     }
+
     
-            @GET
+    @GET
     @Produces(MediaType.APPLICATION_JSON)
-    @Path("products")
-    public String getProducts() throws IOException {
+    @Path("products/{category}")
+    public String getProducts(@PathParam("category") String category) throws IOException {
         ProductFetcher pf = new ProductFetcher();
 
-        CategoryDTO cDTO = pf.getProducts();
+        CategoryDTO cDTO = pf.getProducts(category);
 
         return GSON.toJson(cDTO);
     }
