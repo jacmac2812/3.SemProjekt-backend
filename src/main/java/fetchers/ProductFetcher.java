@@ -21,7 +21,7 @@ import utils.HttpUtils;
  */
 public class ProductFetcher {
 
-    private static final String api = "4okIJitZ9YJrkjNAflJDtqax";
+    private static final String api = "QIO96Jrt2OAcn1q74kepGvCe";
 
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
 
