@@ -9,6 +9,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import dto.CategoryDTO;
 import dto.CombinedDTO;
+import dto.OnSaleDTO;
 import dto.ProductDTO;
 import dto.SearchDTO;
 import java.io.IOException;
@@ -38,5 +39,13 @@ public class ProductFetcher {
         CategoryDTO categoryDTO = GSON.fromJson(products, CategoryDTO.class);
 
         return categoryDTO;
+    }
+    
+    public OnSaleDTO getProductsOnSale() throws IOException {
+        String products = HttpUtils.fetchData("https://api.bestbuy.com/v1/products(onSale=true)?format=json&pageSize=100&apiKey=" + api);
+
+        OnSaleDTO onSaleDTO = GSON.fromJson(products, OnSaleDTO.class);
+
+        return onSaleDTO;
     }
 }

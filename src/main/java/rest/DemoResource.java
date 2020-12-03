@@ -6,6 +6,7 @@ import dto.CategoryDTO;
 import dto.ChuckDTO;
 import dto.CombinedDTO;
 import dto.DadDTO;
+import dto.OnSaleDTO;
 import dto.ProductDTO;
 import dto.SearchDTO;
 import dto.SwabiDTO;
@@ -132,6 +133,17 @@ public class DemoResource {
         CategoryDTO cDTO = pf.getProducts(category);
 
         return GSON.toJson(cDTO);
+    }
+    
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("products/onsale")
+    public String getProductsOnSale() throws IOException {
+        ProductFetcher pf = new ProductFetcher();
+
+        OnSaleDTO osDTO = pf.getProductsOnSale();
+
+        return GSON.toJson(osDTO);
     }
 
     @GET // fjern til sidst efter lavet opret user metode
