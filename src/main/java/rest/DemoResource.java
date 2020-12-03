@@ -7,6 +7,7 @@ import dto.ChuckDTO;
 import dto.CombinedDTO;
 import dto.DadDTO;
 import dto.ProductDTO;
+import dto.SearchDTO;
 import dto.SwabiDTO;
 import entities.Role;
 import entities.User;
@@ -110,19 +111,18 @@ public class DemoResource {
 
         return GSON.toJson(sDTO);
     }
-    
-        @GET
+
+    @GET
     @Produces(MediaType.APPLICATION_JSON)
-    @Path("product")
-    public String getProduct() throws IOException {
+    @Path("product/{search}")
+    public String getProduct(@PathParam("search") String search) throws IOException {
         ProductFetcher pf = new ProductFetcher();
 
-        ProductDTO pDTO = pf.getProduct();
+        SearchDTO sDTO = pf.getProduct(search);
 
-        return GSON.toJson(pDTO);
+        return GSON.toJson(sDTO);
     }
 
-    
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("products/{category}")

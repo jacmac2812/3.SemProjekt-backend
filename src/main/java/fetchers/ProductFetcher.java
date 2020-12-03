@@ -10,6 +10,7 @@ import com.google.gson.GsonBuilder;
 import dto.CategoryDTO;
 import dto.CombinedDTO;
 import dto.ProductDTO;
+import dto.SearchDTO;
 import java.io.IOException;
 import utils.HttpUtils;
 
@@ -19,22 +20,23 @@ import utils.HttpUtils;
  */
 public class ProductFetcher {
 
+    private static final String api = "4okIJitZ9YJrkjNAflJDtqax";
+
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
 
-    public ProductDTO getProduct() throws IOException {
-        String product = HttpUtils.fetchData("https://api.bestbuy.com/v1/products/8880044.json?&apiKey=4okIJitZ9YJrkjNAflJDtqax");
+    public SearchDTO getProduct(String search) throws IOException {
+        String product = HttpUtils.fetchData("https://api.bestbuy.com/v1/products(search=" + search + ")?format=json&pageSize=100&apiKey=" + api);
 
-        
-        ProductDTO pDTO = GSON.fromJson(product, ProductDTO.class);
-        
-        return pDTO;
+        SearchDTO sDTO = GSON.fromJson(product, SearchDTO.class);
+
+        return sDTO;
     }
-    public CategoryDTO getProducts(String category) throws IOException {
-        String products = HttpUtils.fetchData("https://api.bestbuy.com/v1/products(categoryPath.id%20=" + category + ")?format=json&pageSize=100&apiKey=4okIJitZ9YJrkjNAflJDtqax");
 
-        
+    public CategoryDTO getProducts(String category) throws IOException {
+        String products = HttpUtils.fetchData("https://api.bestbuy.com/v1/products(categoryPath.id%20=" + category + ")?format=json&pageSize=100&apiKey=" + api);
+
         CategoryDTO categoryDTO = GSON.fromJson(products, CategoryDTO.class);
-        
+
         return categoryDTO;
     }
 }
