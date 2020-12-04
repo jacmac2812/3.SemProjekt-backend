@@ -3,13 +3,9 @@ package rest;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import dto.CategoryDTO;
-import dto.ChuckDTO;
-import dto.CombinedDTO;
-import dto.DadDTO;
 import dto.OnSaleDTO;
 import dto.ProductDTO;
 import dto.SearchDTO;
-import dto.SwabiDTO;
 import entities.Role;
 import entities.User;
 import java.io.IOException;
@@ -27,7 +23,6 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.SecurityContext;
-import fetchers.JokeFetcher;
 import fetchers.ProductFetcher;
 import javax.ws.rs.PathParam;
 import utils.EMF_Creator;
@@ -88,29 +83,6 @@ public class DemoResource {
     public String getFromAdmin() {
         String thisuser = securityContext.getUserPrincipal().getName();
         return "{\"msg\": \"Hello to (admin) User: " + thisuser + "\"}";
-    }
-
-    @GET //fjern
-    @Produces(MediaType.APPLICATION_JSON)
-    @Path("jokes")
-    @RolesAllowed("user")
-    public String getJokes() throws IOException {
-        JokeFetcher jf = new JokeFetcher();
-
-        CombinedDTO cDTO = jf.getJokes();
-
-        return GSON.toJson(cDTO);
-    }
-
-    @GET //fjern
-    @Produces(MediaType.APPLICATION_JSON)
-    @Path("swabi")
-    public String getSwabi() throws IOException {
-        JokeFetcher jf = new JokeFetcher();
-
-        SwabiDTO sDTO = jf.getSwabi();
-
-        return GSON.toJson(sDTO);
     }
 
     @GET

@@ -129,36 +129,5 @@ public class DemoResourceTest {
                 .statusCode(HttpStatus.OK_200.getStatusCode())
                 .body(equalTo("[3]"));
     }
-
-    @Test
-    public void testGetSwabi() throws Exception {
-        given()
-                .contentType("application/json")
-                .get("/info/swabi").then()
-                .assertThat()
-                .statusCode(HttpStatus.OK_200.getStatusCode())
-                .body("SpaceShipName", equalTo("Death Star"))
-                .body("SpaceShipModel", equalTo("DS-1 Orbital Battle Station"))
-                .body("PersonName", equalTo("Luke Skywalker"))
-                .body("PersonGender", equalTo("male"))
-                .body("planetName", equalTo("Tatooine"))
-                .body("planetPopulation", equalTo("200000"));
-    }
-
-    @Test
-    public void testGetJokes() {
-        login("user", "test");
-        given()
-                .contentType("application/json")
-                .accept(ContentType.JSON)
-                .header("x-access-token", securityToken)
-                .when()
-                .get("/info/jokes").then()
-                .statusCode(200)
-                .body("cJoke", notNullValue())
-                .body("cJokeID", notNullValue())
-                .body("dJoke", notNullValue())
-                .body("dJokeID", notNullValue());
-    }
-
+    
 }

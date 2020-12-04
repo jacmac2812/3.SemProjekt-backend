@@ -8,7 +8,6 @@ package fetchers;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import dto.CategoryDTO;
-import dto.CombinedDTO;
 import dto.OnSaleDTO;
 import dto.ProductDTO;
 import dto.SearchDTO;
