@@ -75,11 +75,11 @@ public class DemoResourceTest {
 
             Role userRole = new Role("user");
             Role adminRole = new Role("admin");
-            User user = new User("user", "test");
+            User user = new User("user", "test", "hej@hej.dk", "12345678");
             user.addRole(userRole);
-            User admin = new User("admin", "test");
+            User admin = new User("admin", "test", "admin@admin.dk", "87654321");
             admin.addRole(adminRole);
-            User both = new User("user_admin", "test");
+            User both = new User("user_admin", "test", "both@both.dk", "11223344");
             both.addRole(userRole);
             both.addRole(adminRole);
             em.persist(userRole);
