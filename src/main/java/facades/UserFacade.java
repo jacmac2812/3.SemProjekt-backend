@@ -13,6 +13,7 @@ import security.errorhandling.AuthenticationException;
 public class UserFacade {
 
     private static EntityManagerFactory emf;
+    
     private static UserFacade instance;
 
     private UserFacade() {
@@ -67,4 +68,33 @@ public class UserFacade {
         }
     }
 
+    public static  UserDTO deleteUser(String name) {
+        EntityManager em = emf.createEntityManager();
+
+        try {
+            
+            //em.createQuery("DELETE FROM user_roles WHERE user_name = :name").setParameter("name", name).executeUpdate();
+            
+            User user = em.find(User.class, name);
+            
+            em.getTransaction().begin();
+           
+            for (Role role : user.getRoleList()) {
+                //user.removeRoles(role);
+                role.removeUser(user);
+            }
+            
+
+            em.remove(user);
+
+            em.getTransaction().commit();
+
+            UserDTO uDTO = new UserDTO(user);
+
+            return uDTO;
+
+        } finally {
+            em.close();
+        }
+    }
 }

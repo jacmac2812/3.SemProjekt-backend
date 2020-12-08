@@ -53,4 +53,9 @@ public class Role implements Serializable {
     public void setUserList(List<User> userList) {
         this.userList = userList;
     }   
+    
+    public void removeUser(User user){
+        this.userList.remove(user);
+        user.getRoleList().remove(this);
+    }
 }

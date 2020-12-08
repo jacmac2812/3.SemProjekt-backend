@@ -11,8 +11,10 @@ import dto.UserDTO;
 import facades.UserFacade;
 import javax.persistence.EntityManagerFactory;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import utils.EMF_Creator;
@@ -36,5 +38,13 @@ public class UserResource {
         UserDTO uDTO = GSON.fromJson(user, UserDTO.class);
         UserDTO uAdded = FACADE.createUser(uDTO.getName(), uDTO.getPassword(), uDTO.getEmail(), uDTO.getPhoneNumber());
         return GSON.toJson(uAdded);
+    }
+    
+    @Path("/{name}")
+    @DELETE
+    @Produces(MediaType.APPLICATION_JSON)
+    public String deleteUser(@PathParam("name") String name){
+        UserDTO uDeleted = FACADE.deleteUser(name);
+        return GSON.toJson(uDeleted);
     }
 }

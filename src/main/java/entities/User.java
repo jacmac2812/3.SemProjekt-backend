@@ -7,6 +7,8 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -66,7 +68,7 @@ public class User implements Serializable {
         return (BCrypt.checkpw(pw, userPass));
     }
 
-    public User(String userName, String userPass, String email, String phoneNumber) {
+    public User( String userName, String userPass, String email, String phoneNumber) {
         this.userName = userName;
         this.userPass = BCrypt.hashpw(userPass, BCrypt.gensalt(5));;
         this.email = email;
@@ -100,6 +102,11 @@ public class User implements Serializable {
 
     public void addRole(Role userRole) {
         roleList.add(userRole);
+    }
+    
+    public void removeRoles(Role role){
+       this.roleList.remove(role);
+       role.getUserList().remove(this);
     }
 
     public String getEmail() {

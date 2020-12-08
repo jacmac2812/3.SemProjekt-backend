@@ -24,6 +24,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.SecurityContext;
 import fetchers.ProductFetcher;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.PathParam;
 import utils.EMF_Creator;
 import utils.HttpUtils;
@@ -85,38 +86,7 @@ public class DemoResource {
         return "{\"msg\": \"Hello to (admin) User: " + thisuser + "\"}";
     }
 
-    @GET
-    @Produces(MediaType.APPLICATION_JSON)
-    @Path("product/{search}")
-    public String getProduct(@PathParam("search") String search) throws IOException {
-        ProductFetcher pf = new ProductFetcher();
-
-        SearchDTO sDTO = pf.getProduct(search);
-
-        return GSON.toJson(sDTO);
-    }
-
-    @GET
-    @Produces(MediaType.APPLICATION_JSON)
-    @Path("products/{category}")
-    public String getProducts(@PathParam("category") String category) throws IOException {
-        ProductFetcher pf = new ProductFetcher();
-
-        CategoryDTO cDTO = pf.getProducts(category);
-
-        return GSON.toJson(cDTO);
-    }
-    
-    @GET
-    @Produces(MediaType.APPLICATION_JSON)
-    @Path("products/onsale")
-    public String getProductsOnSale() throws IOException {
-        ProductFetcher pf = new ProductFetcher();
-
-        OnSaleDTO osDTO = pf.getProductsOnSale();
-
-        return GSON.toJson(osDTO);
-    }
+   
 
 //    @GET // fjern til sidst efter lavet opret user metode
 //    @Produces(MediaType.APPLICATION_JSON)
