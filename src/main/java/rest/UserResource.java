@@ -13,6 +13,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -47,5 +48,15 @@ public class UserResource {
     public String deleteUser(@PathParam("name") String name) {
         UserDTO uDeleted = FACADE.deleteUser(name);
         return GSON.toJson(uDeleted);
+    }
+
+    @Path("/{name}")
+    @PUT
+    @Consumes({MediaType.APPLICATION_JSON})
+    @Produces({MediaType.APPLICATION_JSON})
+    public String editUser(@PathParam("name") String name, String user) {
+        UserDTO uDTO = GSON.fromJson(user, UserDTO.class);
+        UserDTO uEdited = FACADE.editUser(uDTO, name);
+        return GSON.toJson(uEdited);
     }
 }

@@ -5,6 +5,7 @@ import entities.Role;
 import entities.User;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import org.mindrot.jbcrypt.BCrypt;
 import security.errorhandling.AuthenticationException;
 
 /**
@@ -84,6 +85,30 @@ public class UserFacade {
 
             return uDTO;
 
+        } finally {
+            em.close();
+        }
+    }
+    
+    public UserDTO editUser(UserDTO u, String name) {
+        EntityManager em = emf.createEntityManager();
+
+        try {
+            User user = em.find(User.class, name);
+
+            //user.setUserName(u.getName());
+            user.setUserPass(BCrypt.hashpw(u.getPassword(), BCrypt.gensalt(5)));
+            user.setEmail(u.getEmail());
+            user.setPhoneNumber(u.getPhoneNumber());
+
+            em.getTransaction().begin();
+
+            em.persist(user);
+
+            em.getTransaction().commit();
+
+            UserDTO uDTO = new UserDTO(user);
+            return uDTO;
         } finally {
             em.close();
         }
