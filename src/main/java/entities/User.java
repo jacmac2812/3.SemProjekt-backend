@@ -37,7 +37,8 @@ public class User implements Serializable {
         @JoinColumn(name = "user_name", referencedColumnName = "user_name")}, inverseJoinColumns = {
         @JoinColumn(name = "role_name", referencedColumnName = "role_name")})
     @ManyToMany
-    private List<Role> roleList = new ArrayList<>();
+    private List<Role> roleList;
+    
     @Basic(optional = false)
     @NotNull
     private String email;
@@ -73,6 +74,7 @@ public class User implements Serializable {
         this.userPass = BCrypt.hashpw(userPass, BCrypt.gensalt(5));;
         this.email = email;
         this.phoneNumber = phoneNumber;
+        this.roleList = new ArrayList<>();
         this.favorites = new ArrayList<>();
     }
 

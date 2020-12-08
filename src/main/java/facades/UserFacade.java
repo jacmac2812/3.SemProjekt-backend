@@ -68,22 +68,13 @@ public class UserFacade {
         }
     }
 
-    public static  UserDTO deleteUser(String name) {
+    public UserDTO deleteUser(String name) {
         EntityManager em = emf.createEntityManager();
 
         try {
-            
-            //em.createQuery("DELETE FROM user_roles WHERE user_name = :name").setParameter("name", name).executeUpdate();
-            
             User user = em.find(User.class, name);
             
-            em.getTransaction().begin();
-           
-            for (Role role : user.getRoleList()) {
-                //user.removeRoles(role);
-                role.removeUser(user);
-            }
-            
+            em.getTransaction().begin(); 
 
             em.remove(user);
 

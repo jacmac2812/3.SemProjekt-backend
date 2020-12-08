@@ -25,25 +25,26 @@ import utils.EMF_Creator;
  */
 @Path("users")
 public class UserResource {
-     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
-     
-      private static final EntityManagerFactory EMF = EMF_Creator.createEntityManagerFactory();
+
+    private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
+
+    private static final EntityManagerFactory EMF = EMF_Creator.createEntityManagerFactory();
 
     private static final UserFacade FACADE = UserFacade.getUserFacade(EMF);
-     
-      @POST 
+
+    @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public String createUser(String user){
+    public String createUser(String user) {
         UserDTO uDTO = GSON.fromJson(user, UserDTO.class);
         UserDTO uAdded = FACADE.createUser(uDTO.getName(), uDTO.getPassword(), uDTO.getEmail(), uDTO.getPhoneNumber());
         return GSON.toJson(uAdded);
     }
-    
+
     @Path("/{name}")
     @DELETE
     @Produces(MediaType.APPLICATION_JSON)
-    public String deleteUser(@PathParam("name") String name){
+    public String deleteUser(@PathParam("name") String name) {
         UserDTO uDeleted = FACADE.deleteUser(name);
         return GSON.toJson(uDeleted);
     }
