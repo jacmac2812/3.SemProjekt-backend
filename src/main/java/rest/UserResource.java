@@ -43,14 +43,8 @@ public class UserResource {
         UserDTO uAdded = FACADE.createUser(uDTO.getName(), uDTO.getPassword(), uDTO.getEmail(), uDTO.getPhoneNumber());
         return GSON.toJson(uAdded);
     }
-@Path("all")
-    @GET
-    @Produces({MediaType.APPLICATION_JSON})
-    public String getAllUsers() {
-        UsersDTO usDTO = FACADE.getAllUsers();
-        return GSON.toJson(usDTO);
-    }
-    
+
+
     @Path("/{name}")
     @DELETE
     @Produces(MediaType.APPLICATION_JSON)
@@ -67,5 +61,13 @@ public class UserResource {
         UserDTO uDTO = GSON.fromJson(user, UserDTO.class);
         UserDTO uEdited = FACADE.editUser(uDTO, name);
         return GSON.toJson(uEdited);
+    }
+    
+    @Path("/all")
+    @GET
+    @Produces({MediaType.APPLICATION_JSON})
+    public String getAllUsers() {
+        UsersDTO usDTO = FACADE.getAllUsers();
+        return GSON.toJson(usDTO);
     }
 }

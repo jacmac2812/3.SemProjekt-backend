@@ -119,10 +119,9 @@ public class UserFacade {
     public UsersDTO getAllUsers() {
         EntityManager em = emf.createEntityManager();
         try {
-            TypedQuery<User> query
-                    = em.createQuery("SELECT u FROM Users u", User.class);
-            List<User> userEntities = query.getResultList();
-            UsersDTO all = new UsersDTO(userEntities);
+            TypedQuery<User> query = em.createQuery("select u from User u", entities.User.class);
+            List<User> users = query.getResultList();
+            UsersDTO all = new UsersDTO(users);
             return all;
         } finally {
             em.close();
