@@ -8,10 +8,12 @@ package rest;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import dto.UserDTO;
+import dto.UsersDTO;
 import facades.UserFacade;
 import javax.persistence.EntityManagerFactory;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
@@ -41,7 +43,14 @@ public class UserResource {
         UserDTO uAdded = FACADE.createUser(uDTO.getName(), uDTO.getPassword(), uDTO.getEmail(), uDTO.getPhoneNumber());
         return GSON.toJson(uAdded);
     }
-
+@Path("all")
+    @GET
+    @Produces({MediaType.APPLICATION_JSON})
+    public String getAllUsers() {
+        UsersDTO usDTO = FACADE.getAllUsers();
+        return GSON.toJson(usDTO);
+    }
+    
     @Path("/{name}")
     @DELETE
     @Produces(MediaType.APPLICATION_JSON)

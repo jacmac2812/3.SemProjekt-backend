@@ -1,10 +1,13 @@
 package facades;
 
 import dto.UserDTO;
+import dto.UsersDTO;
 import entities.Role;
 import entities.User;
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.TypedQuery;
 import org.mindrot.jbcrypt.BCrypt;
 import security.errorhandling.AuthenticationException;
 
@@ -109,6 +112,18 @@ public class UserFacade {
 
             UserDTO uDTO = new UserDTO(user);
             return uDTO;
+        } finally {
+            em.close();
+        }
+    }
+    public UsersDTO getAllUsers() {
+        EntityManager em = emf.createEntityManager();
+        try {
+            TypedQuery<User> query
+                    = em.createQuery("SELECT u FROM Users u", User.class);
+            List<User> userEntities = query.getResultList();
+            UsersDTO all = new UsersDTO(userEntities);
+            return all;
         } finally {
             em.close();
         }
