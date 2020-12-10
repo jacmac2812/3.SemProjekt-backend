@@ -5,6 +5,8 @@
  */
 package dto;
 
+import entities.Favorit;
+
 /**
  *
  * @author jacobsimonsen
@@ -31,6 +33,97 @@ public class ProductDTO {
         this.mobileUrl = mobileUrl;
         this.image = image;
         this.shortDesription = shortDesription;
+        this.onSale = onSale;
+    }
+    
+    public ProductDTO(Favorit favorit) {
+        this.sku = favorit.getSku();
+        this.name = favorit.getName();
+        this.type = favorit.getType();
+        this.regularPrice = favorit.getRegularPrice();
+        this.salePrice = favorit.getSalePrice();
+        this.url = favorit.getUrl();
+        this.image = favorit.getImage();
+        this.onSale = favorit.getOnSale();
+    }
+
+    public String getSku() {
+        return sku;
+    }
+
+    public void setSku(String sku) {
+        this.sku = sku;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getRegularPrice() {
+        return regularPrice;
+    }
+
+    public void setRegularPrice(String regularPrice) {
+        this.regularPrice = regularPrice;
+    }
+
+    public String getSalePrice() {
+        return salePrice;
+    }
+
+    public void setSalePrice(String salePrice) {
+        this.salePrice = salePrice;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public String getMobileUrl() {
+        return mobileUrl;
+    }
+
+    public void setMobileUrl(String mobileUrl) {
+        this.mobileUrl = mobileUrl;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public String getShortDesription() {
+        return shortDesription;
+    }
+
+    public void setShortDesription(String shortDesription) {
+        this.shortDesription = shortDesription;
+    }
+
+    public String getOnSale() {
+        return onSale;
+    }
+
+    public void setOnSale(String onSale) {
         this.onSale = onSale;
     }
 
