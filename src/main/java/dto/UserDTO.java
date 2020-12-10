@@ -12,9 +12,10 @@ import entities.User;
  * @author jacobsimonsen
  */
 public class UserDTO {
+
     String name;
     String email;
-    String phoneNumber; 
+    String phoneNumber;
     String password;
 
     public UserDTO(String name, String password, String email, String phoneNumber) {
@@ -23,7 +24,7 @@ public class UserDTO {
         this.email = email;
         this.phoneNumber = phoneNumber;
     }
-    
+
     public UserDTO(User user) {
         this.name = user.getUserName();
         this.email = user.getEmail();
@@ -61,6 +62,5 @@ public class UserDTO {
     public void setPassword(String password) {
         this.password = password;
     }
-    
-    
+
 }

@@ -31,16 +31,16 @@ import utils.EMF_Creator;
  *
  * @author jacobsimonsen
  */
-
 @Path("products")
 public class ProductResource {
+
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
-    
+
     private static final EntityManagerFactory EMF = EMF_Creator.createEntityManagerFactory();
 
     private static final FavoritFacade FACADE = FavoritFacade.getFavoritFacade(EMF);
-    
-     @GET
+
+    @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("{search}")
     public String getProduct(@PathParam("search") String search) throws IOException {
@@ -61,7 +61,7 @@ public class ProductResource {
 
         return GSON.toJson(cDTO);
     }
-    
+
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("offers")
@@ -76,12 +76,13 @@ public class ProductResource {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-        @Path("favorites/{user}")
+    @Path("favorites/{user}")
     public String addFavorit(@PathParam("user") String user, String product) {
         ProductDTO pDTO = GSON.fromJson(product, ProductDTO.class);
         ProductDTO pAdded = FACADE.addFavorit(pDTO, user);
         return GSON.toJson(pAdded);
     }
+
     @Path("favorites/{user}")
     @GET
     @Produces({MediaType.APPLICATION_JSON})
@@ -89,6 +90,7 @@ public class ProductResource {
         ProductsDTO psDTO = FACADE.getAllFavorites(user);
         return GSON.toJson(psDTO);
     }
+
     @Path("favorites/{sku}/users/{user}")
     @DELETE
     @Produces(MediaType.APPLICATION_JSON)

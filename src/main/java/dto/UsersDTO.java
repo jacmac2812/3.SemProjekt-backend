@@ -14,6 +14,7 @@ import java.util.List;
  * @author jacobsimonsen
  */
 public class UsersDTO {
+
     List<UserDTO> all = new ArrayList();
 
     public UsersDTO(List<User> userEntities) {
@@ -25,5 +26,5 @@ public class UsersDTO {
     public List<UserDTO> getAll() {
         return all;
     }
-    
+
 }

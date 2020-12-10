@@ -17,7 +17,7 @@ import security.errorhandling.AuthenticationException;
 public class UserFacade {
 
     private static EntityManagerFactory emf;
-    
+
     private static UserFacade instance;
 
     private UserFacade() {
@@ -77,8 +77,8 @@ public class UserFacade {
 
         try {
             User user = em.find(User.class, name);
-            
-            em.getTransaction().begin(); 
+
+            em.getTransaction().begin();
 
             em.remove(user);
 
@@ -92,7 +92,7 @@ public class UserFacade {
             em.close();
         }
     }
-    
+
     public UserDTO editUser(UserDTO u, String name) {
         EntityManager em = emf.createEntityManager();
 
@@ -116,6 +116,7 @@ public class UserFacade {
             em.close();
         }
     }
+
     public UsersDTO getAllUsers() {
         EntityManager em = emf.createEntityManager();
         try {

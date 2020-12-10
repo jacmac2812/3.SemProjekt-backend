@@ -38,7 +38,7 @@ public class User implements Serializable {
         @JoinColumn(name = "role_name", referencedColumnName = "role_name")})
     @ManyToMany
     private List<Role> roleList;
-    
+
     @Basic(optional = false)
     @NotNull
     private String email;
@@ -46,10 +46,10 @@ public class User implements Serializable {
     @Basic(optional = false)
     @NotNull
     private String phoneNumber;
-    
-    @ManyToMany (mappedBy = "users", cascade = CascadeType.PERSIST)
+
+    @ManyToMany(mappedBy = "users", cascade = CascadeType.PERSIST)
     List<Favorit> favorites;
-    
+
     public List<String> getRolesAsStrings() {
         if (roleList.isEmpty()) {
             return null;
@@ -69,7 +69,7 @@ public class User implements Serializable {
         return (BCrypt.checkpw(pw, userPass));
     }
 
-    public User( String userName, String userPass, String email, String phoneNumber) {
+    public User(String userName, String userPass, String email, String phoneNumber) {
         this.userName = userName;
         this.userPass = BCrypt.hashpw(userPass, BCrypt.gensalt(5));
         this.email = email;
@@ -105,10 +105,10 @@ public class User implements Serializable {
     public void addRole(Role userRole) {
         roleList.add(userRole);
     }
-    
-    public void removeRoles(Role role){
-       this.roleList.remove(role);
-       role.getUserList().remove(this);
+
+    public void removeRoles(Role role) {
+        this.roleList.remove(role);
+        role.getUserList().remove(this);
     }
 
     public String getEmail() {
@@ -131,14 +131,14 @@ public class User implements Serializable {
         return favorites;
     }
 
-    public void addFavorit(Favorit favorit){
-       if (favorit != null) {
+    public void addFavorit(Favorit favorit) {
+        if (favorit != null) {
             this.favorites.add(favorit);
             favorit.getUsers().add(this);
         }
     }
 
-    public void removeFavorit(Favorit favorit){
+    public void removeFavorit(Favorit favorit) {
         if (favorit != null) {
             this.favorites.remove(favorit);
             favorit.getUsers().remove(this);

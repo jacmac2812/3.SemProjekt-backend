@@ -81,20 +81,18 @@ public class FavoritFacade {
         try {
 
             em.getTransaction().begin();
-            
 
-            //em.createQuery("DELETE FROM Favorit f JOIN f.users u WHERE u.userName =:name AND f.sku =:sku", Favorit.class).setParameter("name", name).setParameter("sku", sku).executeUpdate();
-User user = em.find(User.class, name);
-            for (Favorit f : user.getFavorites()) {
-                if(f.getSku() == sku){
-                user.removeFavorit(f);
-                } 
-                
-            }
+            User user = em.find(User.class, name);
+
+            Favorit f = em.find(Favorit.class, sku);
+
+            user.removeFavorit(f);
             em.persist(user);
+            em.persist(f);
+
             em.getTransaction().commit();
 
-           String returnMsg = "Deleted "+ sku;
+            String returnMsg = "Deleted " + sku;
 
             return returnMsg;
 

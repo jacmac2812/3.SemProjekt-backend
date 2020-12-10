@@ -86,8 +86,6 @@ public class DemoResource {
         return "{\"msg\": \"Hello to (admin) User: " + thisuser + "\"}";
     }
 
-   
-
 //    @GET // fjern til sidst efter lavet opret user metode
 //    @Produces(MediaType.APPLICATION_JSON)
 //    @Path("populate")
@@ -116,5 +114,4 @@ public class DemoResource {
 //
 //        return GSON.toJson("hej");
 //    }
-
 }

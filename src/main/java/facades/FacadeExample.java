@@ -14,13 +14,13 @@ public class FacadeExample {
 
     private static FacadeExample instance;
     private static EntityManagerFactory emf;
-    
+
     //Private Constructor to ensure Singleton
-    private FacadeExample() {}
-    
-    
+    private FacadeExample() {
+    }
+
     /**
-     * 
+     *
      * @param _emf
      * @return an instance of this facade class.
      */
@@ -35,17 +35,17 @@ public class FacadeExample {
     private EntityManager getEntityManager() {
         return emf.createEntityManager();
     }
-    
+
     //TODO Remove/Change this before use
-    public long getRenameMeCount(){
+    public long getRenameMeCount() {
         EntityManager em = emf.createEntityManager();
-        try{
-            long renameMeCount = (long)em.createQuery("SELECT COUNT(r) FROM RenameMe r").getSingleResult();
+        try {
+            long renameMeCount = (long) em.createQuery("SELECT COUNT(r) FROM RenameMe r").getSingleResult();
             return renameMeCount;
-        }finally{  
+        } finally {
             em.close();
         }
-        
+
     }
 
 }

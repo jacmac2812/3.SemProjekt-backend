@@ -44,7 +44,6 @@ public class UserResource {
         return GSON.toJson(uAdded);
     }
 
-
     @Path("/{name}")
     @DELETE
     @Produces(MediaType.APPLICATION_JSON)
@@ -62,7 +61,7 @@ public class UserResource {
         UserDTO uEdited = FACADE.editUser(uDTO, name);
         return GSON.toJson(uEdited);
     }
-    
+
     @Path("/all")
     @GET
     @Produces({MediaType.APPLICATION_JSON})

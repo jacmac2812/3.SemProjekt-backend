@@ -29,38 +29,37 @@ public class Favorit implements Serializable {
     @Basic(optional = false)
     @NotNull
     private String sku;
-    
+
     @Basic(optional = false)
     @NotNull
     private String name;
-    
+
     @Basic(optional = false)
     @NotNull
     private String type;
-    
+
     @Basic(optional = false)
     @NotNull
     private String regularPrice;
-    
+
     @Basic(optional = false)
     @NotNull
     private String salePrice;
-    
+
     @Basic(optional = false)
     @NotNull
     private String url;
-    
+
     @Basic(optional = false)
     @NotNull
     private String image;
-    
+
     @Basic(optional = false)
     @NotNull
     private String onSale;
-    
+
     @ManyToMany
     private List<User> users;
-    
 
     public Favorit() {
     }
@@ -148,6 +147,5 @@ public class Favorit implements Serializable {
     public void setUsers(List<User> users) {
         this.users = users;
     }
-    
-    
+
 }

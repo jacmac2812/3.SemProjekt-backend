@@ -13,14 +13,15 @@ import java.util.List;
  * @author jacobsimonsen
  */
 public class CategoryDTO {
-List<ProductDTO> products = new ArrayList();
+
+    List<ProductDTO> products = new ArrayList();
 
     public CategoryDTO(List<ProductDTO> productsDTO) {
-       this.products = productsDTO;
+        this.products = productsDTO;
     }
 
     public List<ProductDTO> getAll() {
         return products;
     }
-    
+
 }

@@ -13,10 +13,11 @@ import java.util.List;
  * @author jacobsimonsen
  */
 public class SearchDTO {
+
     List<ProductDTO> products = new ArrayList();
 
     public SearchDTO(List<ProductDTO> productsDTO) {
-       this.products = productsDTO;
+        this.products = productsDTO;
     }
 
     public List<ProductDTO> getAll() {
