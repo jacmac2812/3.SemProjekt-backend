@@ -9,6 +9,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import dto.UserDTO;
 import dto.UsersDTO;
+import errorhandling.MissingInputException;
 import facades.UserFacade;
 import javax.annotation.security.RolesAllowed;
 import javax.persistence.EntityManagerFactory;
@@ -39,7 +40,7 @@ public class UserResource {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public String createUser(String user) {
+    public String createUser(String user) throws MissingInputException {
         UserDTO uDTO = GSON.fromJson(user, UserDTO.class);
         UserDTO uAdded = FACADE.createUser(uDTO.getName(), uDTO.getPassword(), uDTO.getEmail(), uDTO.getPhoneNumber());
         return GSON.toJson(uAdded);

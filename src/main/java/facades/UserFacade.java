@@ -4,6 +4,7 @@ import dto.UserDTO;
 import dto.UsersDTO;
 import entities.Role;
 import entities.User;
+import errorhandling.MissingInputException;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -50,8 +51,18 @@ public class UserFacade {
         return user;
     }
 
-    public UserDTO createUser(String name, String password, String email, String phoneNumber) {
-
+    public UserDTO createUser(String name, String password, String email, String phoneNumber) throws MissingInputException {
+        
+        if (name.length() == 0 || password.length() == 0) {
+            throw new MissingInputException("Name and/or password is missing");
+        }
+        if (email.length() == 0 || email.contains("@") == false) {
+            throw new MissingInputException("Email missing and/or does not contain @");
+        }
+        if (phoneNumber.length() != 8) {
+            throw new MissingInputException("Phonenumber is the wrong length");
+        }
+        
         EntityManager em = emf.createEntityManager();
 
         try {
@@ -98,11 +109,18 @@ public class UserFacade {
 
         try {
             User user = em.find(User.class, name);
-
-            //user.setUserName(u.getName());
-            user.setUserPass(BCrypt.hashpw(u.getPassword(), BCrypt.gensalt(5)));
-            user.setEmail(u.getEmail());
-            user.setPhoneNumber(u.getPhoneNumber());
+            
+            if (u.getPassword().length() != 0) {
+                user.setUserPass(BCrypt.hashpw(u.getPassword(), BCrypt.gensalt(5)));
+            }
+            
+            if (u.getEmail().length() != 0 || u.getEmail().contains("@") == true) {
+                user.setEmail(u.getEmail());
+            }
+            
+            if (u.getPhoneNumber().length() != 0) {
+                user.setPhoneNumber(u.getPhoneNumber());
+            }            
 
             em.getTransaction().begin();
 
@@ -120,7 +138,7 @@ public class UserFacade {
     public UsersDTO getAllUsers() {
         EntityManager em = emf.createEntityManager();
         try {
-            TypedQuery<User> query = em.createQuery("select u from User u", entities.User.class);
+            TypedQuery<User> query = em.createQuery("SELECT u FROM User u", entities.User.class);
             List<User> users = query.getResultList();
             UsersDTO all = new UsersDTO(users);
             return all;
