@@ -15,6 +15,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.NamedQuery;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -22,6 +23,7 @@ import javax.validation.constraints.NotNull;
  * @author jacobsimonsen
  */
 @Entity
+@NamedQuery(name = "Favorit.deleteAllRows", query = "DELETE from Favorit")
 public class Favorit implements Serializable {
 
     private static final long serialVersionUID = 1L;

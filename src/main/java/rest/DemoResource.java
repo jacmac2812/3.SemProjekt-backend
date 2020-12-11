@@ -86,32 +86,4 @@ public class DemoResource {
         return "{\"msg\": \"Hello to (admin) User: " + thisuser + "\"}";
     }
 
-//    @GET // fjern til sidst efter lavet opret user metode
-//    @Produces(MediaType.APPLICATION_JSON)
-//    @Path("populate")
-//    public String populate() throws IOException {
-//
-//        EntityManagerFactory emf = EMF_Creator.createEntityManagerFactory();
-//        EntityManager em = emf.createEntityManager();
-//
-//        User user = new User("user", "hello");
-//        User admin = new User("admin", "with");
-//        User both = new User("user_admin", "you");
-//
-//        em.getTransaction().begin();
-//        Role userRole = new Role("user");
-//        Role adminRole = new Role("admin");
-//        user.addRole(userRole);
-//        admin.addRole(adminRole);
-//        both.addRole(userRole);
-//        both.addRole(adminRole);
-//        em.persist(userRole);
-//        em.persist(adminRole);
-//        em.persist(user);
-//        em.persist(admin);
-//        em.persist(both);
-//        em.getTransaction().commit();
-//
-//        return GSON.toJson("hej");
-//    }
 }
