@@ -10,6 +10,7 @@ import com.google.gson.GsonBuilder;
 import dto.UserDTO;
 import dto.UsersDTO;
 import facades.UserFacade;
+import javax.annotation.security.RolesAllowed;
 import javax.persistence.EntityManagerFactory;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -65,6 +66,7 @@ public class UserResource {
     @Path("/all")
     @GET
     @Produces({MediaType.APPLICATION_JSON})
+    @RolesAllowed("admin")
     public String getAllUsers() {
         UsersDTO usDTO = FACADE.getAllUsers();
         return GSON.toJson(usDTO);
