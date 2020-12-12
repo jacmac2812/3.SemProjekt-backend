@@ -207,7 +207,7 @@ public class UserResourceTest {
     }
 
     @Test
-    public void testGetAllUser() throws Exception {
+    public void testGetAllUsers() throws Exception {
 
         login("admin", "with");
         List<UserDTO> usersDTO;
